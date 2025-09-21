@@ -1,6 +1,7 @@
 import discord
 import json
 import os
+import datetime
 
 from config import DISCORD_BOT_TOKEN
 
@@ -12,6 +13,15 @@ bot = discord.Bot(intents=intents)
 
 # Nome do arquivo que vai armazenar os dados dos ninjas
 DATA_FILE = "ninjas.json"
+
+# Mapa de Emojis para o comando de resumo
+EMOJI_MAP = {
+    "katon": "🔥",
+    "suiton": "💧",
+    "fuuton": "🌪️",
+    "doton": "🗿",
+    "raiton": "⚡"
+}
 
 # --- Funções de Gerenciamento de Dados ---
 
@@ -36,80 +46,102 @@ def salvar_dados(dados):
 async def on_ready():
     """Função que é chamada quando o bot está online e pronto."""
     print(f'Bot conectado como {bot.user}')
-    print('Bot online e com todas as funcionalidades prontas!')
+    print('Bot online com sistema de múltiplos elementos!')
     print('-' * 20)
 
-# --- Comandos de Elemento (LÓGICA ATUALIZADA) ---
+# --- NOVO Comando de Elementos ---
 
-async def registrar_elemento(ctx: discord.ApplicationContext, nome: str, elemento: str, emoji: str):
-    """
-    Função auxiliar para registrar um elemento.
-    CRIA o ninja se ele não existir, ou ATUALIZA se ele já existir.
-    """
-    dados = carregar_dados()
-    
-    # Garante que o ninja exista no dicionário (padrão "get or create")
-    if nome not in dados:
-        dados[nome] = {}
+@bot.slash_command(name="elementos", description="Registra ou atualiza um ninja com uma lista de elementos.")
+async def elementos(
+    ctx: discord.ApplicationContext, 
+    dados: discord.Option(str, "O primeiro nome é o do ninja, o resto são seus elementos. Ex: Naruto Fuuton Katon")
+):
+    """Registra um ninja com uma lista de elementos e salva o timestamp."""
+    try:
+        partes = dados.split()
+        if len(partes) < 2:
+            await ctx.respond("❗️ **Formato inválido.** Forneça o nome do ninja e pelo menos um elemento.", ephemeral=True)
+            return
+            
+        nome_ninja = partes[0]
+        lista_elementos = [elem.lower() for elem in partes[1:]]  # Normaliza para minúsculas
         
-    # Adiciona ou atualiza as informações do elemento
-    dados[nome]['elemento'] = elemento
-    dados[nome]['emoji'] = emoji
+        elementos_validos = set(EMOJI_MAP.keys())
+        for elem in lista_elementos:
+            if elem not in elementos_validos:
+                elementos_formatados_validos = ', '.join([e.title() for e in elementos_validos])
+                await ctx.respond(f"❗️ **Elemento inválido:** {elem.title()}.\nElementos válidos são: {elementos_formatados_validos}", ephemeral=True)
+                return
+    except Exception as e:
+        await ctx.respond(f"❗️ **Ocorreu um erro ao processar sua entrada:** {e}", ephemeral=True)
+        return
+
+    db_ninjas = carregar_dados()
     
-    salvar_dados(dados)
-    await ctx.respond(f"{emoji} O ninja **{nome}** agora possui o elemento **{elemento}**!")
-
-@bot.slash_command(name="katon", description="🔥 Registra um nome de ninja com o elemento Fogo.")
-async def katon(ctx: discord.ApplicationContext, nome: discord.Option(str, "Digite o nome do ninja a ser registrado.")):
-    await registrar_elemento(ctx, nome, "Katon", "🔥")
-
-@bot.slash_command(name="suiton", description="💧 Registra um nome de ninja com o elemento Água.")
-async def suiton(ctx: discord.ApplicationContext, nome: discord.Option(str, "Digite o nome do ninja a ser registrado.")):
-    await registrar_elemento(ctx, nome, "Suiton", "💧")
-
-@bot.slash_command(name="fuuton", description="🌪️ Registra um nome de ninja com o elemento Vento.")
-async def fuuton(ctx: discord.ApplicationContext, nome: discord.Option(str, "Digite o nome do ninja a ser registrado.")):
-    await registrar_elemento(ctx, nome, "Fuuton", "🌪️")
-
-@bot.slash_command(name="doton", description="🗿 Registra um nome de ninja com o elemento Terra.")
-async def doton(ctx: discord.ApplicationContext, nome: discord.Option(str, "Digite o nome do ninja a ser registrado.")):
-    await registrar_elemento(ctx, nome, "Doton", "🗿")
-
-@bot.slash_command(name="raiton", description="⚡ Registra um nome de ninja com o elemento Raio.")
-async def raiton(ctx: discord.ApplicationContext, nome: discord.Option(str, "Digite o nome do ninja a ser registrado.")):
-    await registrar_elemento(ctx, nome, "Raiton", "⚡")
-
-# --- Comandos de Selo (LÓGICA ATUALIZADA) ---
-
-async def atualizar_selo(ctx: discord.ApplicationContext, nome: str, status_selo: bool):
-    """
-    Função auxiliar para aplicar ou remover o debuff de selo.
-    CRIA o ninja se ele não existir, ou ATUALIZA se ele já existir.
-    """
-    dados = carregar_dados()
-    
-    # Garante que o ninja exista no dicionário (padrão "get or create")
-    if nome not in dados:
-        dados[nome] = {}
+    if nome_ninja not in db_ninjas:
+        db_ninjas[nome_ninja] = {}
         
-    # Adiciona ou atualiza o status do selo
-    dados[nome]['debuff_de_selo'] = status_selo
-    salvar_dados(dados)
+    # Pega o timestamp atual
+    timestamp = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
     
-    if status_selo:
-        await ctx.respond(f"🔒 O ninja **{nome}** agora está **com** o debuff de selo.")
+    # Salva a lista de elementos E o timestamp da atualização
+    db_ninjas[nome_ninja]["elementos"] = lista_elementos
+    db_ninjas[nome_ninja]["updated_at"] = timestamp
+    
+    salvar_dados(db_ninjas)
+
+    elementos_formatados = ", ".join([elem.title() for elem in lista_elementos])
+    await ctx.respond(f"✅ O ninja **{nome_ninja}** foi registrado/atualizado com os elementos: **{elementos_formatados}**.\n*Última atualização: <t:{timestamp}:R>*")
+
+@bot.slash_command(name="check", description="Verifica os elementos e status de um ninja específico.")
+async def check(
+    ctx: discord.ApplicationContext,
+    nome: discord.Option(str, "O nome do ninja que você quer verificar.")
+):
+    """Verifica e exibe os dados de um ninja."""
+    
+    db_ninjas = carregar_dados()
+    
+    # Verifica se o ninja existe no banco de dados
+    if nome not in db_ninjas:
+        await ctx.respond(f"❌ Ninja **{nome}** não encontrado no banco de dados.", ephemeral=True)
+        return
+        
+    # Pega os dados do ninja
+    info_ninja = db_ninjas[nome]
+    
+    # Cria o embed da resposta
+    embed = discord.Embed(
+        title=f"📜 Ficha do Ninja: {nome} 📜",
+        color=discord.Color.blue()
+    )
+    
+    # Pega a lista de elementos ou uma lista vazia se não houver
+    lista_elementos = info_ninja.get('elementos', [])
+    
+    if not lista_elementos:
+        elementos_str = "Nenhum elemento registrado."
     else:
-        await ctx.respond(f"🔓 O ninja **{nome}** agora está **sem** o debuff de selo.")
+        # Formata a lista de elementos com emojis
+        elementos_formatados = []
+        for elem in lista_elementos:
+            emoji = EMOJI_MAP.get(elem, "❔")
+            elementos_formatados.append(f"{emoji} {elem.title()}")
+        elementos_str = "\n".join(elementos_formatados)
+        
+    embed.add_field(name="🌀 Elementos", value=elementos_str, inline=False)
+    
+    # Pega o timestamp da última atualização
+    timestamp = info_ninja.get('updated_at')
+    
+    if timestamp:
+        # Formata o timestamp para exibição no Discord
+        atualizacao_str = f"<t:{timestamp}:F> (<t:{timestamp}:R>)"
+        embed.add_field(name="⏳ Última Atualização dos Elementos", value=atualizacao_str, inline=False)
+        
+    await ctx.respond(embed=embed)
 
-@bot.slash_command(name="selo", description="🔒 Aplica o debuff de selo em um ninja (cria o ninja se não existir).")
-async def selo(ctx: discord.ApplicationContext, nome: discord.Option(str, "O nome do ninja que receberá o debuff.")):
-    await atualizar_selo(ctx, nome, True)
-
-@bot.slash_command(name="semselo", description="🔓 Remove o debuff de selo de um ninja (cria o ninja se não existir).")
-async def semselo(ctx: discord.ApplicationContext, nome: discord.Option(str, "O nome do ninja que terá o debuff removido.")):
-    await atualizar_selo(ctx, nome, False)
-
-# --- Comando de Resumo Simplificado (sem alterações) ---
+# --- Comando de Resumo (Adaptado para a nova estrutura) ---
 
 @bot.slash_command(name="resumo", description="📋 Mostra um resumo da contagem de ninjas por status.")
 async def resumo(ctx: discord.ApplicationContext):
@@ -119,40 +151,36 @@ async def resumo(ctx: discord.ApplicationContext):
         return
 
     contagem_elementos = {}
-    ninjas_selados = 0
-    ninjas_sem_selo = 0
 
     for info in ninjas.values():
-        elemento = info.get('elemento', 'Sem Elemento')
-        emoji = info.get('emoji', '❔')
-        if elemento not in contagem_elementos:
-            contagem_elementos[elemento] = {'count': 0, 'emoji': emoji}
-        contagem_elementos[elemento]['count'] += 1
-        
-        if info.get('debuff_de_selo', False):
-            ninjas_selados += 1
-        else:
-            ninjas_sem_selo += 1
+        # Loop através da LISTA de elementos de cada ninja
+        for elemento in info.get('elementos', []): # .get com [] para ninjas sem elemento
+            if elemento not in contagem_elementos:
+                # Busca o emoji no mapa que criamos no topo do arquivo
+                emoji = EMOJI_MAP.get(elemento, '❔')
+                contagem_elementos[elemento] = {'count': 0, 'emoji': emoji}
+            contagem_elementos[elemento]['count'] += 1
 
     embed = discord.Embed(
         title="📊 Resumo de Status dos Ninjas 📊",
-        description="Contagem total de ninjas por elemento e status de selo.",
+        description="Contagem total de ninjas e ocorrências de elementos.",
         color=discord.Color.from_rgb(70, 130, 180)
     )
 
     resumo_elementos_str = ""
-    for elemento, data in sorted(contagem_elementos.items()):
-        resumo_elementos_str += f"{data['emoji']} **{elemento}**: {data['count']}\n"
-    if resumo_elementos_str:
-        embed.add_field(name="Contagem por Elemento", value=resumo_elementos_str, inline=True)
+    if not contagem_elementos:
+        resumo_elementos_str = "Nenhum elemento registrado."
+    else:
+        for elemento, data in sorted(contagem_elementos.items()):
+            resumo_elementos_str += f"{data['emoji']} **{elemento.title()}**: {data['count']}\n"
     
-    resumo_selos_str = f"🔒 **Com debuff de Selo:** {ninjas_selados}\n🔓 **Sem debuff de Selo:** {ninjas_sem_selo}"
-    embed.add_field(name="Status de Selo", value=resumo_selos_str, inline=True)
+    embed.add_field(name="Ocorrências de Elementos", value=resumo_elementos_str, inline=True)
 
     embed.set_footer(text=f"Total de {len(ninjas)} ninjas cadastrados.")
     await ctx.respond(embed=embed)
 
-# --- Comando de Rotação (sem alterações) ---
+
+# --- Comando de Rotação  ---
 
 @bot.slash_command(name="rotacao", description="Calcula o dano de uma rotação golpe a golpe para derrotar um inimigo.")
 async def rotacao(
@@ -211,7 +239,6 @@ async def rotacao(
         embed.add_field(name=titulo_campo, value=f"```\n{log_parcial}```", inline=False)
         
     await ctx.respond(embed=embed)
-
 
 
 # --- Execução do Bot ---

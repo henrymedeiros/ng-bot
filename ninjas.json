@@ -1,376 +1,106 @@
 {
-    "lBerseiron": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "shupakun": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "87523": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "iCardoso__": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7",
-        "debuff_de_selo": true
-    },
-    "kurosombrio": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "bb7": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "arabiosaudito": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "LooLdRum": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "AR": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "CulioJezar": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Frozen Blast": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "kaiser10": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "K4I": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "grandekinkaku": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "Fte": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Homenzinho": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "DhouggA": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "lamenha": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "night_fury": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "joshy": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "Zain": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "jhongaku": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "Night_Fury": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Ebberman": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "MrBag": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "Pantanal": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "Yeaager": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "LordValcker": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "QueTeSokaMuito": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "_Jao": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "Kaisel": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "Rickerz": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "RAKUUYO": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "JadokaDokaDoka": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "test123": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "GiyuTomioka": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "PreservActivo": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "DaUmCig4rroAi": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
     "Arabio_Saudito": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
+        "elementos": [
+            "doton",
+            "fuuton"
+        ],
+        "updated_at": 1758399875
     },
-    "Calton": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
+    "KiliK": {
+        "elementos": [
+            "raiton",
+            "doton"
+        ],
+        "updated_at": 1758407615
     },
-    "Notade_": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
+    "Fullose": {
+        "elementos": [
+            "fuuton",
+            "suiton"
+        ],
+        "updated_at": 1758399875
     },
-    "FinalIlusion": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
+    "lDragonSlayer": {
+        "elementos": [
+            "katon",
+            "fuuton"
+        ],
+        "updated_at": 1758399875
     },
-    "Takinha": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
+    "teste123": {
+        "elementos": [
+            "katon",
+            "doton"
+        ],
+        "updated_at": 1758399896
     },
-    "OReiJunior": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "lBelserion": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "llan": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "Shikabum": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "Jonhnny_Sins": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "HatakeShin": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "Hiruto": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "TucTuc": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "AngelofDeath": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "SilEncio": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "GodSnow": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1",
-        "debuff_de_selo": true
-    },
-    "ERR0": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "0lhera": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Vitola7": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "SlayerS": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "Flair": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "seco01": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "MaryAction": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "CrystalPower": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "ODeusUchiha": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "_Smaug": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "FullLose": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7",
-        "debuff_de_selo": true
-    },
-    "Tomperus": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Masked_": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Formiguinha123": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "L17": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "FirstStrike": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "ONESPECIAL": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "FiudaAreia": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "DudaValdez": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "JuliusFN": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "SnapeOrochi": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "SakuGrande": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "Tanjir0_": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Togashi": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "liberamaisNPC": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "RockLeeFL": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "Togaru": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "BeijoDaMorte": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "HeMan": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "Iariah": {
-        "elemento": "Katon",
-        "emoji": "\ud83d\udd25"
-    },
-    "___Hunter___": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "Nuevo": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
-    },
-    "Cosmonauta": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
-    },
-    "FakeKenny": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
-    },
-    "MoonLord": {
-        "elemento": "Fuuton",
-        "emoji": "\ud83c\udf2a\ufe0f"
-    },
-    "DoguDoArrocha": {
-        "debuff_de_selo": true
+    "Gustavoxz": {
+        "elementos": [
+            "katon",
+            "suiton"
+        ],
+        "updated_at": 1758399917
     },
     "zH1gh": {
-        "elemento": "Suiton",
-        "emoji": "\ud83d\udca7"
+        "elementos": [
+            "katon",
+            "raiton"
+        ],
+        "updated_at": 1758399955
     },
-    "bkotun": {
-        "elemento": "Raiton",
-        "emoji": "\u26a1"
+    "Ebberman": {
+        "elementos": [
+            "katon",
+            "doton"
+        ],
+        "updated_at": 1758400005
     },
-    "Motense_": {
-        "elemento": "Doton",
-        "emoji": "\ud83d\uddff"
+    "AnyaForger": {
+        "elementos": [
+            "fuuton",
+            "doton"
+        ],
+        "updated_at": 1758400055
+    },
+    "Pantanal": {
+        "elementos": [
+            "katon",
+            "raiton"
+        ],
+        "updated_at": 1758400085
+    },
+    "DingonBell": {
+        "elementos": [
+            "raiton",
+            "doton"
+        ],
+        "updated_at": 1758400139
+    },
+    "SlayerS": {
+        "elementos": [
+            "katon",
+            "doton"
+        ],
+        "updated_at": 1758400172
+    },
+    "Rickerz": {
+        "elementos": [
+            "katon",
+            "suiton"
+        ],
+        "updated_at": 1758403152
+    },
+    "Envy": {
+        "elementos": [
+            "raiton",
+            "suiton"
+        ],
+        "updated_at": 1758409424
+    },
+    "KALARD": {
+        "elementos": [
+            "doton"
+        ],
+        "updated_at": 1758417397
     }
 }
